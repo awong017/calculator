@@ -47,11 +47,20 @@ const App = () => {
     }
   );
 
-  const input = (number) => {
+  const handleInput = (number) => {
     updateCalculation(
       {
-        input: number,
+        input: `${(calculation.input === 0 ? "" : calculation.input)}${number}`,
         computation: calculation
+      }
+    )
+  };
+
+  const handleClear = () => {
+    updateCalculation(
+      {
+        input: 0,
+        computation: 0
       }
     )
   };
@@ -59,23 +68,23 @@ const App = () => {
   return (
     <AppDiv>
       <div className="calculator">
-        <div className="display">{calculation.calculation}</div>
+        <div className="display">{calculation.input}</div>
         <div className="buttons">
           <ul>
-            <li onClick={() => input(7)}>7</li>
-            <li>8</li>
-            <li>9</li>
+            <li onClick={() => handleInput(7)}>7</li>
+            <li onClick={() => handleInput(8)}>8</li>
+            <li onClick={() => handleInput(9)}>9</li>
             <li>/</li>
-            <li>4</li>
-            <li>5</li>
-            <li>6</li>
+            <li onClick={() => handleInput(4)}>4</li>
+            <li onClick={() => handleInput(5)}>5</li>
+            <li onClick={() => handleInput(6)}>6</li>
             <li>*</li>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
+            <li onClick={() => handleInput(1)}>1</li>
+            <li onClick={() => handleInput(2)}>2</li>
+            <li onClick={() => handleInput(3)}>3</li>
             <li>-</li>
-            <li>0</li>
-            <li>Clear</li>
+            <li onClick={() => handleInput(0)}>0</li>
+            <li onClick={() => handleClear()}>Clear</li>
             <li>=</li>
             <li>+</li>
           </ul>
