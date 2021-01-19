@@ -40,6 +40,15 @@ const AppDiv = Styled.div`
 
 const App = () => {
 
+  const [operation, updateOperation] = useState(
+    {
+      isAdding: false,
+      isSubtracting: false,
+      isMultiplying: false,
+      isDividing: false,
+    }
+  )
+
   const [calculation, updateCalculation] = useState(
     {
       input: 0,
@@ -51,10 +60,51 @@ const App = () => {
     updateCalculation(
       {
         input: `${(calculation.input === 0 ? "" : calculation.input)}${number}`,
-        computation: calculation
+        computation: calculation.computation
       }
     )
   };
+
+  const handleAdd = () => {
+    updateCalculation(
+      {
+        input: 0,
+        computation: calculation.computation + parseInt(calculation.input)
+      }
+    )
+    console.log("Total:", calculation.computation);
+  };
+
+  const handleSubtract = () => {
+    updateCalculation(
+      {
+        input: 0,
+        computation: calculation.computation - parseInt(calculation.input)
+      }
+    )
+  };
+
+  const handleMultiply = () => {
+    updateCalculation(
+      {
+        input: 0,
+        computation: calculation.computation * parseInt(calculation.input)
+      }
+    )
+  };
+
+  const handleDivide = () => {
+    updateCalculation(
+      {
+        input: 0,
+        computation: calculation.computation / parseInt(calculation.input)
+      }
+    )
+  };
+
+  const handleEquals = () => {
+    updateOperation({isActive: false});
+  }
 
   const handleClear = () => {
     updateCalculation(
@@ -65,28 +115,39 @@ const App = () => {
     )
   };
 
+  const display = () => {
+    if (operation.isActive === false) {
+      return calculation.computation;
+    }
+    else {
+      return calculation.input
+    }
+  };
+
   return (
     <AppDiv>
       <div className="calculator">
-        <div className="display">{calculation.input}</div>
+        <div className="display">
+          {calculation.input}
+        </div>
         <div className="buttons">
           <ul>
             <li onClick={() => handleInput(7)}>7</li>
             <li onClick={() => handleInput(8)}>8</li>
             <li onClick={() => handleInput(9)}>9</li>
-            <li>/</li>
+            <li onClick={() => handleDivide()}>/</li>
             <li onClick={() => handleInput(4)}>4</li>
             <li onClick={() => handleInput(5)}>5</li>
             <li onClick={() => handleInput(6)}>6</li>
-            <li>*</li>
+            <li onClick={() => handleMultiply()}>*</li>
             <li onClick={() => handleInput(1)}>1</li>
             <li onClick={() => handleInput(2)}>2</li>
             <li onClick={() => handleInput(3)}>3</li>
-            <li>-</li>
+            <li onClick={() => handleSubtract()}>-</li>
             <li onClick={() => handleInput(0)}>0</li>
             <li onClick={() => handleClear()}>Clear</li>
-            <li>=</li>
-            <li>+</li>
+            <li onClick={() => console.log(calculation)}>=</li>
+            <li onClick={() => handleAdd()}>+</li>
           </ul>
         </div>
       </div>
