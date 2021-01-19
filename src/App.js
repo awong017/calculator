@@ -1,19 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Styled from "styled-components";
 
-const App = Styled.div`
+const AppDiv = Styled.div`
   color: white;
 
   .calculator {
     margin-top: 300px;
     margin-left: auto;
     margin-right: auto;
-    border: 2px solid white;
     width: 300px;
 
     .display {
       border-bottom: 2px solid white;
-      padding-right: 24px;
       text-align: right;
     }
 
@@ -40,14 +38,31 @@ const App = Styled.div`
   }
 `;
 
-const app = () => {
+const App = () => {
+
+  const [calculation, updateCalculation] = useState(
+    {
+      input: 0,
+      computation: 0
+    }
+  );
+
+  const input = (number) => {
+    updateCalculation(
+      {
+        input: number,
+        computation: calculation
+      }
+    )
+  };
+
   return (
-    <App>
+    <AppDiv>
       <div className="calculator">
-        <div className="display">DISPLAY</div>
+        <div className="display">{calculation.calculation}</div>
         <div className="buttons">
           <ul>
-            <li>7</li>
+            <li onClick={() => input(7)}>7</li>
             <li>8</li>
             <li>9</li>
             <li>/</li>
@@ -66,8 +81,8 @@ const app = () => {
           </ul>
         </div>
       </div>
-    </App>
+    </AppDiv>
   );
 };
 
-export default app;
+export default App;
