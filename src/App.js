@@ -59,47 +59,47 @@ const App = () => {
   const handleInput = (number) => {
     updateCalculation(
       {
-        input: `${(calculation.input === 0 ? "" : calculation.input)}${number}`,
+        input: parseInt(`${(calculation.input === 0 ? "" : calculation.input)}${number}`),
         computation: calculation.computation
       }
     )
   };
 
+  const handleOperation = () => {
+    if (operation.isAdding === true) {
+      updateCalculation({input: 0, computation: calculation.computation + calculation.input})
+    }
+    else if (operation.isSubtracting === true) {
+      updateCalculation({input: 0, computation: calculation.computation - calculation.input})
+    }
+    else if (operation.isMultiplying === true) {
+      updateCalculation({input: 0, computation: calculation.computation * calculation.input})
+    }
+    else if (operation.isDividing === true) {
+      updateCalculation({input: 0, computation: calculation.computation / calculation.input})
+    }
+  }
+
   const handleAdd = () => {
-    updateCalculation(
+    updateOperation(
       {
-        input: 0,
-        computation: calculation.computation + parseInt(calculation.input)
+        isAdding: true,
+        isSubtracting: false,
+        isMultiplying: false,
+        isDividing: false,
       }
     )
+    handleOperation();
     console.log("Total:", calculation.computation);
   };
 
   const handleSubtract = () => {
-    updateCalculation(
-      {
-        input: 0,
-        computation: calculation.computation - parseInt(calculation.input)
-      }
-    )
   };
 
   const handleMultiply = () => {
-    updateCalculation(
-      {
-        input: 0,
-        computation: calculation.computation * parseInt(calculation.input)
-      }
-    )
   };
 
   const handleDivide = () => {
-    updateCalculation(
-      {
-        input: 0,
-        computation: calculation.computation / parseInt(calculation.input)
-      }
-    )
   };
 
   const handleEquals = () => {
@@ -113,15 +113,6 @@ const App = () => {
         computation: 0
       }
     )
-  };
-
-  const display = () => {
-    if (operation.isActive === false) {
-      return calculation.computation;
-    }
-    else {
-      return calculation.input
-    }
   };
 
   return (
