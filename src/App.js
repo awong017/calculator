@@ -65,20 +65,20 @@ const App = () => {
     )
   };
 
-  const handleOperation = () => {
-    if (operation.isAdding === true) {
-      updateCalculation({input: 0, computation: calculation.computation + calculation.input})
-    }
-    else if (operation.isSubtracting === true) {
-      updateCalculation({input: 0, computation: calculation.computation - calculation.input})
-    }
-    else if (operation.isMultiplying === true) {
-      updateCalculation({input: 0, computation: calculation.computation * calculation.input})
-    }
-    else if (operation.isDividing === true) {
-      updateCalculation({input: 0, computation: calculation.computation / calculation.input})
-    }
-  }
+  // const handleOperation = (operationState) => {
+  //   if (operationState.isAdding === true) {
+  //     updateCalculation({input: 0, computation: calculation.computation + calculation.input})
+  //   }
+  //   else if (operationState.isSubtracting === true) {
+  //     updateCalculation({input: 0, computation: calculation.computation - calculation.input})
+  //   }
+  //   else if (operationState.isMultiplying === true) {
+  //     updateCalculation({input: 0, computation: calculation.computation * calculation.input})
+  //   }
+  //   else if (operationState.isDividing === true) {
+  //     updateCalculation({input: 0, computation: calculation.computation / calculation.input})
+  //   }
+  // }
 
   const handleAdd = () => {
     updateOperation(
@@ -89,7 +89,6 @@ const App = () => {
         isDividing: false,
       }
     )
-    handleOperation();
     console.log("Total:", calculation.computation);
   };
 
