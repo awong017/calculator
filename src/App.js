@@ -80,7 +80,7 @@ const App = () => {
   //   }
   // }
 
-  const handleAdd = () => {
+  const handleAdd = (operationState) => {
     updateOperation(
       {
         isAdding: true,
@@ -89,6 +89,9 @@ const App = () => {
         isDividing: false,
       }
     )
+    if (operationState.isAdding === true) {
+          updateCalculation({input: 0, computation: calculation.computation + calculation.input})
+        }
     console.log("Total:", calculation.computation);
   };
 
@@ -137,7 +140,7 @@ const App = () => {
             <li onClick={() => handleInput(0)}>0</li>
             <li onClick={() => handleClear()}>Clear</li>
             <li onClick={() => console.log(calculation)}>=</li>
-            <li onClick={() => handleAdd()}>+</li>
+            <li onClick={() => handleAdd(operation)}>+</li>
           </ul>
         </div>
       </div>
