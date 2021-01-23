@@ -96,6 +96,18 @@ const App = () => {
   };
 
   const handleSubtract = () => {
+    updateOperation(
+      {
+        isAdding: false,
+        isSubtracting: true,
+        isMultiplying: false,
+        isDividing: false,
+      }
+    )
+    if (operationState.isSubtracting === true) {
+          updateCalculation({input: 0, computation: calculation.computation - calculation.input})
+        }
+    console.log("Total:", calculation.computation);
   };
 
   const handleMultiply = () => {
