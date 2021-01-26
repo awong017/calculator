@@ -111,6 +111,18 @@ const App = () => {
   };
 
   const handleMultiply = () => {
+    updateOperation(
+      {
+        isAdding: false,
+        isSubtracting: false,
+        isMultiplying: true,
+        isDividing: false,
+      }
+    )
+    if (operationState.isMultiplying === true) {
+          updateCalculation({input: 0, computation: calculation.computation * calculation.input})
+        }
+    console.log("Total:", calculation.computation);
   };
 
   const handleDivide = () => {
