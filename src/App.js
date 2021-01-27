@@ -126,6 +126,17 @@ const App = () => {
   };
 
   const handleDivide = () => {
+    updateOperation(
+      {
+        isAdding: false,
+        isSubtracting: false,
+        isMultiplying: false,
+        isDividing: true,
+      }
+    )
+    if (operationState.isDividing === true) {
+          updateCalculation({input: 0, computation: calculation.computation / calculation.input})
+        }
   };
 
   const handleEquals = () => {
