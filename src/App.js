@@ -92,7 +92,6 @@ const App = () => {
     if (operationState.isAdding === true) {
           updateCalculation({input: 0, computation: calculation.computation + calculation.input})
         }
-    console.log("Total:", calculation.computation);
   };
 
   const handleSubtract = () => {
