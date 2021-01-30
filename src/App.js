@@ -92,6 +92,15 @@ const App = () => {
     if (operationState.isAdding === true) {
           updateCalculation({input: 0, computation: calculation.computation + calculation.input})
         }
+    else if (operationState.isSubtracting === true) {
+          updateCalculation({input: 0, computation: calculation.computation - calculation.input})
+        }
+    else if (operationState.isMultiplying === true) {
+          updateCalculation({input: 0, computation: calculation.computation * calculation.input})
+        }
+    else if (operationState.isDividing === true) {
+          updateCalculation({input: 0, computation: calculation.computation / calculation.input})
+        }
   };
 
   const handleSubtract = () => {
