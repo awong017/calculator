@@ -166,6 +166,8 @@ const App = () => {
 
   const handleEquals = () => {
     updateOperation({isActive: false});
+
+    console.log(calculation);
   }
 
   const handleClear = () => {
