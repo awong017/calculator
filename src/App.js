@@ -84,11 +84,11 @@ const App = () => {
     )
     setOperation(
       {
-        isAdding: false,
-        isSubtracting: true,
-        isMultiplying: false,
-        isDividing: false,
-        isCalculated: true
+        isAdding: operation.isAdding,
+        isSubtracting: operation.isSubtracting,
+        isMultiplying: operation.isMultiplying,
+        isDividing: operation.isDividing,
+        isCalculated: false
       }
     )
   };
@@ -197,12 +197,11 @@ const App = () => {
             <li onClick={() => handleInput(3)}>3</li>
             <li onClick={() => handleSubtract(operation)}>-</li>
             <li onClick={() => handleInput(0)}>0</li>
-            <li onClick={() => handleClear()}>Clear</li>
+            <li onClick={() => handleClear()}>clr</li>
             <li onClick={() => handleEquals(operation)}>=</li>
             <li onClick={() => handleAdd(operation)}>+</li>
           </ul>
         </div>
-        <button onClick={() => console.log(calculation)}>Computation</button>
       </div>
     </AppDiv>
   );
