@@ -40,16 +40,17 @@ const AppDiv = Styled.div`
 
 const App = () => {
 
-  const [operation, updateOperation] = useState(
+  const [operation, setOperation] = useState(
     {
       isAdding: false,
       isSubtracting: false,
       isMultiplying: false,
       isDividing: false,
+      isCalculated: false
     }
   )
 
-  const [calculation, updateCalculation] = useState(
+  const [calculation, setCalculation] = useState(
     {
       input: 0,
       computation: 0
@@ -57,7 +58,7 @@ const App = () => {
   );
 
   const handleInput = (number) => {
-    updateCalculation(
+    setCalculation(
       {
         input: parseInt(`${(calculation.input === 0 ? "" : calculation.input)}${number}`),
         computation: calculation.computation
@@ -65,116 +66,86 @@ const App = () => {
     )
   };
 
-  // const handleOperation = (operationState) => {
-  //   if (operationState.isAdding === true) {
-  //     updateCalculation({input: 0, computation: calculation.computation + calculation.input})
-  //   }
-  //   else if (operationState.isSubtracting === true) {
-  //     updateCalculation({input: 0, computation: calculation.computation - calculation.input})
-  //   }
-  //   else if (operationState.isMultiplying === true) {
-  //     updateCalculation({input: 0, computation: calculation.computation * calculation.input})
-  //   }
-  //   else if (operationState.isDividing === true) {
-  //     updateCalculation({input: 0, computation: calculation.computation / calculation.input})
-  //   }
-  // }
+  const handleOperations = (operation) => {
+    if (operation.isAdding === true) {
+      setCalculation({input:0,computation:calculation.computation+calculation.input});
+    }
+    else if (operation.isSubtracting === true) {
+      setCalculation({input:0,computation:calculation.computation-calculation.input});
+    }
+    else if (operation.isMultiplying === true) {
+      setCalculation({input:0,computation:calculation.computation*calculation.input});
+    }
+    else if (operation.isDividing === true) {
+      setCalculation({input:0,computation:calculation.computation/calculation.input});
+    }
+    else {
+      setCalculation({input:0,computation:calculation.input});
+    }
+  }
 
-  const handleAdd = (operationState) => {
-    updateOperation(
+  const handleAdd = (operation) => {
+    if (operation.isAdding === true) {
+      setCalculation({input:0,computation:calculation.computation+calculation.input});
+    }
+    else {
+      setCalculation({input:0,computation:calculation.input});
+    }
+    setOperation(
       {
         isAdding: true,
         isSubtracting: false,
         isMultiplying: false,
         isDividing: false,
+        isCalculated: false
       }
     )
-    if (operationState.isAdding === true) {
-          updateCalculation({input: 0, computation: calculation.computation + calculation.input})
-        }
-    else if (operationState.isSubtracting === true) {
-          updateCalculation({input: 0, computation: calculation.computation - calculation.input})
-        }
-    else if (operationState.isMultiplying === true) {
-          updateCalculation({input: 0, computation: calculation.computation * calculation.input})
-        }
-    else if (operationState.isDividing === true) {
-          updateCalculation({input: 0, computation: calculation.computation / calculation.input})
-        }
   };
 
   const handleSubtract = () => {
-    updateOperation(
-      {
-        isAdding: false,
-        isSubtracting: true,
-        isMultiplying: false,
-        isDividing: false,
-      }
-    )
-    if (operationState.isAdding === true) {
-      updateCalculation({input: 0, computation: calculation.computation + calculation.input})
-    }
-    else if (operationState.isSubtracting === true) {
-      updateCalculation({input: 0, computation: calculation.computation - calculation.input})
-    }
-    else if (operationState.isMultiplying === true) {
-      updateCalculation({input: 0, computation: calculation.computation * calculation.input})
-    }
-    else if (operationState.isDividing === true) {
-      updateCalculation({input: 0, computation: calculation.computation / calculation.input})
-    }
+    console.log("Subtracting");
   };
 
   const handleMultiply = () => {
-    updateOperation(
-      {
-        isAdding: false,
-        isSubtracting: false,
-        isMultiplying: true,
-        isDividing: false,
-      }
-    )
-    if (operationState.isMultiplying === true) {
-          updateCalculation({input: 0, computation: calculation.computation * calculation.input})
-        }
-    console.log("Total:", calculation.computation);
+    console.log("Multiplying");
   };
 
   const handleDivide = () => {
-    updateOperation(
+    console.log("Dividing");
+  };
+
+  const handleEquals = () => {
+    if (operation.isAdding === true) {
+      setCalculation({input:0,computation:calculation.computation+calculation.input});
+    }
+    else {
+      setCalculation({input:0,computation:calculation.input});
+    }
+    setOperation(
       {
         isAdding: false,
         isSubtracting: false,
         isMultiplying: false,
-        isDividing: true,
+        isDividing: false,
+        isCalculated: true
       }
     )
-    if (operationState.isAdding === true) {
-      updateCalculation({input: 0, computation: calculation.computation + calculation.input})
-    }
-    else if (operationState.isSubtracting === true) {
-      updateCalculation({input: 0, computation: calculation.computation - calculation.input})
-    }
-    else if (operationState.isMultiplying === true) {
-      updateCalculation({input: 0, computation: calculation.computation * calculation.input})
-    }
-    else if (operationState.isDividing === true) {
-      updateCalculation({input: 0, computation: calculation.computation / calculation.input})
-    }
   };
 
-  const handleEquals = () => {
-    updateOperation({isActive: false});
-
-    console.log(calculation);
-  }
-
   const handleClear = () => {
-    updateCalculation(
+    setCalculation(
       {
         input: 0,
         computation: 0
+      }
+    )
+    setOperation(
+      {
+        isAdding: false,
+        isSubtracting: false,
+        isMultiplying: false,
+        isDividing: false,
+        isCalculated: false
       }
     )
   };
@@ -183,7 +154,7 @@ const App = () => {
     <AppDiv>
       <div className="calculator">
         <div className="display">
-          {calculation.input}
+          {operation.isCalculated ? calculation.computation : calculation.input}
         </div>
         <div className="buttons">
           <ul>
@@ -201,7 +172,7 @@ const App = () => {
             <li onClick={() => handleSubtract()}>-</li>
             <li onClick={() => handleInput(0)}>0</li>
             <li onClick={() => handleClear()}>Clear</li>
-            <li onClick={() => console.log(calculation)}>=</li>
+            <li onClick={() => handleEquals()}>=</li>
             <li onClick={() => handleAdd(operation)}>+</li>
           </ul>
         </div>
